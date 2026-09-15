@@ -1,8 +1,13 @@
 import os
 
 from dotenv import load_dotenv
-from sqlalchemy import URL, create_engine
-from sqlalchemy import text
+from sqlalchemy import URL, create_engine, text
+from sqlalchemy.orm import DeclarativeBase
+
+
+class Base(DeclarativeBase):
+    pass
+
 
 load_dotenv()
 
@@ -22,8 +27,6 @@ database_url = URL.create(
 )
 
 engine = create_engine(database_url)
-
-
 
 with engine.connect() as connection:
     result = connection.execute(text("SELECT 1"))
